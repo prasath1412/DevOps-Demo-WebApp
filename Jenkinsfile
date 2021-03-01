@@ -15,7 +15,7 @@ pipeline {
     }
         post {
        always {
-           jiraSendBuildInfo site: 'prasath-learning.atlassian.net', site: 'CHECK-2'
+           jiraSendBuildInfo site: 'prasath-learning.atlassian.net', branch: 'CHECK-1'
        }
     }
 }
