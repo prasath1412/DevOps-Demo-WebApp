@@ -8,3 +8,4 @@ testing poll scm
 testing webhook scenario - check1
 
 check declarative pipeline!!!!!!
+git scm push
