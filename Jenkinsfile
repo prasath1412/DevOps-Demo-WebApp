@@ -15,7 +15,7 @@ pipeline {
     }
         post {
        always {
-           jiraSendBuildInfo site: 'prasath-learning.atlassian.net', issueKeys: ['CHECK-1']
+           jiraSendDeploymentInfo  site: 'prasath-learning.atlassian.net', issueKeys: ['CHECK-1']
        }
     }
 }
