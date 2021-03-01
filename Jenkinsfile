@@ -13,6 +13,10 @@ pipeline {
         steps {
             sh 'mvn clean install -f pom.xml'
     }
+        ost {
+       always {
+           jiraSendBuildInfo site: 'prasath-learning.atlassian.net'
+       }
     }
 }
 }
