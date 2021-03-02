@@ -48,7 +48,7 @@ pipeline {
 		
 		stage ('Deploy to QA') {
            steps {
-			deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://18.191.130.54:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
+			deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://18.191.20.90:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
 			}
 		}
 		stage ('Run UI Tests') {
@@ -64,7 +64,7 @@ pipeline {
 		//}
 		stage ('Deploy to Prod') {
            steps {
-			deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://3.134.102.79:8080')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
+			deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://18.219.125.171:8080')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
 			}
 		}
 		
