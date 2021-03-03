@@ -18,18 +18,21 @@ pipeline {
 		stage ('static code analysis') {
            steps {
                 sh 'mvn validate' 
+		slackSend (color: "good", message: 'Validate') 
             }
 		}
 		
 		stage ('Build') {
            steps {
                 sh 'mvn compile' 
+		slackSend (color: "good", message: 'Build-Compile') 
             }
 		}
 		
 		stage ('Package') {
            steps {
                 sh 'mvn package' 
+		 slackSend (color: "good", message: 'Package') 
             }
 		}
 		stage ('Publish to artifactory') {
