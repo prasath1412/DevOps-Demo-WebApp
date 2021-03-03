@@ -42,23 +42,23 @@ pipeline {
 				rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.war")
 				def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'install'
 				server.publishBuildInfo buildInfo
-				slackSend channel: 'cicd_alerts', message: 'Publish to artifactory'
-				}
+			    slackSend (color: "good", message: 'Publish to artifactory') 
+                }
 			}
 		}
 		
 		stage ('Deploy to QA') {
            steps {
 			deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://3.142.69.90:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
-			slackSend channel: 'cicd_alerts', message: 'Deploy to QA'
-			}
+			slackSend (color: "good", message: 'Deploy to QA') 
+           }
 		}
 		stage ('Run UI Tests') {
            steps {
                 sh 'mvn -f functionaltest/pom.xml  test' 
 				publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
-            	slackSend channel: 'cicd_alerts', message: 'Run UI Tests'
-	    }
+            	slackSend (color: "good", message: 'Run UI Tests') 
+           }
 		}
 		//stage ('Run Performance Test') {
 		//	steps{
@@ -68,16 +68,16 @@ pipeline {
 		stage ('Deploy to Prod') {
            steps {
 			deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://3.134.100.82:8080')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
-			slackSend channel: 'cicd_alerts', message: 'Deploy to Prod'
-			}
+			slackSend (color: "good", message: 'Deploy to Prod') 
+           }
 		}
 		
 		stage ('Run Acceptance Tests') {
            steps {
                 sh 'mvn -f Acceptancetest/pom.xml  test' 
 				publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'Sanity Test Report', reportTitles: ''])
-            	slackSend channel: 'cicd_alerts', message: 'Run Acceptance Tests'
-	    }
+            	slackSend (color: "good", message: 'Run Acceptance Tests') 
+            	  }
 		}
 	}
 }
