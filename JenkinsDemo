@@ -42,7 +42,7 @@ pipeline {
 				rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.war")
 				def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'install'
 				server.publishBuildInfo buildInfo
-			    slackSend (color: "good", message: 'Publish to artifactory') 
+			    slackSend (color: "good", message: 'Publish to Artifactory') 
                 }
 			}
 		}
