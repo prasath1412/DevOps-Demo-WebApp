@@ -83,4 +83,10 @@ pipeline {
             	  }
 		}
 	}
+	post {
+      	 always {
+		   	jiraSendBuildInfo site: 'prasath-learning.atlassian.net'
+           		jiraSendDeploymentInfo site: 'prasath-learning.atlassian.net', issueKeys: ['CHECK-1']
+      		 }
+	}
 }
